@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gallery | Pandit Guruji Pune</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<section class="page-banner">
+
+<header class="hero-header">
+
+<div class="container nav-container">
+
+<div class="logo">
+<i class="fa-solid fa-om"></i>
+PanditGuruji
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="about.html">About</a></li>
+
+<li><a href="services.html">Services</a></li>
+
+<li><a href="gallery.html" class="active">Gallery</a></li>
+
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<a href="contact.html" class="nav-btn">Book Now</a>
+
+</div>
+
+
+<button class="hamburger" id="hamburger" aria-label="Toggle menu">
+<span></span><span></span><span></span>
+</button>
+
+</header>
+<div class="nav-overlay" id="navOverlay"></div>
+
+
+<div class="container">
+
+<h1>Gallery</h1>
+
+<p>
+
+Moments of Faith • Devotion • Tradition
+
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-heading">
+
+<h2>
+
+Our Gallery
+
+</h2>
+
+<p>
+
+Some beautiful moments captured during various Vedic ceremonies.
+
+</p>
+
+</div>
+
+<div class="gallery-grid">
+
+<img src="images/gallery-1.jpg">
+
+<img src="images/gallery-2.jpg">
+
+<img src="images/gallery-3.jpg">
+
+<img src="images/gallery-4.jpg">
+
+<img src="images/gallery-5.jpg">
+
+<img src="images/gallery-6.jpg">
+
+<img src="images/gallery-7.jpg">
+
+<img src="images/gallery-8.jpg">
+
+<img src="images/gallery-9.jpg">
+
+<img src="images/gallery-10.jpg">
+
+<img src="images/gallery-11.jpg">
+
+<img src="images/gallery-12.jpg">
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<div class="container">
+
+<h2>
+
+Experience Authentic Vedic Rituals
+
+</h2>
+
+<p>
+
+Book your next Puja with our experienced Pandit Ji.
+
+</p>
+
+<a href="contact.html" class="btn">
+
+Book Now
+
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+
+<h3>Pandit Guruji</h3>
+
+<p>
+
+Authentic Vedic Rituals Across Pune.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Quick Links</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="about.html">About</a></li>
+
+<li><a href="services.html">Services</a></li>
+
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>Popular Pujas</h3>
+
+<ul>
+
+<li>Satyanarayan</li>
+
+<li>Marriage</li>
+
+<li>Rudrabhishek</li>
+
+<li>Griha Pravesh</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>Contact</h3>
+
+<p>📍 Pune</p>
+
+<p>📞 +91 XXXXX XXXXX</p>
+
+<p>✉ info@panditguruji.in</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">
+
+©2026 Pandit Guruji Pune
+
+</p>
+
+</div>
+
+</footer>
+
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('nav');
+const overlay = document.getElementById('navOverlay');
+
+function toggleMenu(){
+  hamburger.classList.toggle('open');
+  nav.classList.toggle('open');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
+
+// close on nav link click
+document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', ()=>{
+  if(nav.classList.contains('open')) toggleMenu();
+}));
+</script>
+
+</body>
+
+</html>
