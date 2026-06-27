@@ -1,390 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-
-Contact Us | Pandit Guruji
-
-</title>
-
-<link rel="stylesheet" href="css/style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Pandit Guruji Pune</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-
 <body>
 
+<!-- ================= PAGE BANNER ================= -->
 <section class="page-banner">
 
-<header class="hero-header">
+  <header class="hero-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <i class="fa-solid fa-om"></i>
+        PanditGuruji
+      </div>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="contact.html" class="nav-btn">Book Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-<div class="container nav-container">
+  <div class="nav-overlay" id="navOverlay"></div>
 
-<div class="logo">
-
-<i class="fa-solid fa-om"></i>
-
-PanditGuruji
-
-</div>
-
-<nav>
-
-<ul>
-
-<li><a href="index.html">Home</a></li>
-
-<li><a href="about.html">About</a></li>
-
-<li><a href="services.html">Services</a></li>
-
-<li><a href="gallery.html">Gallery</a></li>
-
-<li><a href="contact.html" class="active">Contact</a></li>
-
-</ul>
-
-</nav>
-
-<a href="#" class="nav-btn">
-
-Book Now
-
-</a>
-
-</div>
-
-
-<button class="hamburger" id="hamburger" aria-label="Toggle menu">
-<span></span><span></span><span></span>
-</button>
-
-</header>
-<div class="nav-overlay" id="navOverlay"></div>
-
-
-<div class="container">
-
-<h1>
-
-Contact Us
-
-</h1>
-
-<p>
-
-Let's help you perform your next Puja.
-
-</p>
-
-</div>
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Let's help you perform your next Puja.</p>
+  </div>
 
 </section>
 
+<!-- ================= CONTACT GRID ================= -->
 <section>
+  <div class="container">
+    <div class="contact-grid">
 
-<div class="container">
+      <!-- Info -->
+      <div class="contact-info fade-up">
+        <h2>Get In Touch</h2>
 
-<div class="contact-grid">
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <h3>Pune</h3>
+            <p>Available across all areas in Pune, Maharashtra.</p>
+          </div>
+        </div>
 
-<div class="contact-info">
+        <div class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <div>
+            <h3>Phone</h3>
+            <p>+91 XXXXX XXXXX</p>
+          </div>
+        </div>
 
-<h2>
+        <div class="contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <div>
+            <h3>Email</h3>
+            <p>info@panditguruji.in</p>
+          </div>
+        </div>
 
-Get In Touch
+        <div class="contact-item">
+          <i class="fa-brands fa-whatsapp"></i>
+          <div>
+            <h3>WhatsApp</h3>
+            <p>Quick responses for bookings — message us anytime.</p>
+          </div>
+        </div>
 
-</h2>
+        <div class="contact-item">
+          <i class="fa-solid fa-clock"></i>
+          <div>
+            <h3>Working Hours</h3>
+            <p>Mon – Sun: 7:00 AM – 9:00 PM</p>
+          </div>
+        </div>
+      </div>
 
-<div class="contact-item">
+      <!-- Form -->
+      <div class="contact-form fade-up">
+        <h2>Book Your Puja</h2>
+        <form>
+          <input type="text" placeholder="Full Name" required>
+          <input type="email" placeholder="Email Address" required>
+          <input type="tel" placeholder="Phone Number" required>
+          <input type="text" placeholder="Required Puja (e.g. Satyanarayan, Griha Pravesh)">
+          <input type="text" placeholder="Preferred Date / Muhurat">
+          <textarea placeholder="Any additional message or requirements..."></textarea>
+          <button type="submit" class="btn">Send Request</button>
+        </form>
+      </div>
 
-<i class="fa-solid fa-location-dot"></i>
-
-<div>
-
-<h3>Pune</h3>
-
-<p>
-
-Available across Pune.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="contact-item">
-
-<i class="fa-solid fa-phone"></i>
-
-<div>
-
-<h3>Phone</h3>
-
-<p>
-
-+91 XXXXX XXXXX
-
-</p>
-
-</div>
-
-</div>
-
-<div class="contact-item">
-
-<i class="fa-solid fa-envelope"></i>
-
-<div>
-
-<h3>Email</h3>
-
-<p>
-
-info@panditguruji.in
-
-</p>
-
-</div>
-
-</div>
-
-<div class="contact-item">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-<div>
-
-<h3>WhatsApp</h3>
-
-<p>
-
-Quick responses for bookings.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="contact-form">
-
-<h2>
-
-Book Your Puja
-
-</h2>
-
-<form>
-
-<input
-type="text"
-placeholder="Full Name"
-required>
-
-<input
-type="email"
-placeholder="Email Address"
-required>
-
-<input
-type="tel"
-placeholder="Phone Number"
-required>
-
-<input
-type="text"
-placeholder="Required Puja">
-
-<textarea
-placeholder="Write your message..."></textarea>
-
-<button
-type="submit"
-class="btn">
-
-Send Request
-
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
+    </div>
+  </div>
 </section>
 
-<section>
-
-<div class="container">
-
-<div style="height:450px;
-background:#1b2028;
-border-radius:20px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:25px;
-color:#C9A86A;">
-
-Google Maps Placeholder
-
-</div>
-
-</div>
-
+<!-- ================= GOOGLE MAPS ================= -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="section-heading" style="margin-bottom:35px;">
+      <h2>Find Us</h2>
+      <p>We serve families across all areas of Pune, Maharashtra.</p>
+    </div>
+    <div class="map-container">
+      <!-- Google Maps embed — Pune city centre -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242122.05291834375!2d73.72892889999999!3d18.524564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1719475200000!5m2!1sen!2sin"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Pandit Guruji Pune Location">
+      </iframe>
+    </div>
+  </div>
 </section>
 
+<!-- ================= CTA ================= -->
 <section class="cta">
-
-<div class="container">
-
-<h2>
-
-Ready To Book Your Puja?
-
-</h2>
-
-<p>
-
-Call or WhatsApp us today.
-
-</p>
-
-<a href="#" class="btn">
-
-Call Now
-
-</a>
-
-</div>
-
+  <div class="container">
+    <h2>Ready To Book Your Puja?</h2>
+    <p>Call or WhatsApp us today for quick booking and Muhurat guidance.</p>
+    <a href="tel:+91XXXXXXXXXX" class="btn">Call Now</a>
+  </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer>
-
-<div class="container">
-
-<div class="footer-grid">
-
-<div>
-
-<h3>Pandit Guruji</h3>
-
-<p>
-
-Serving families across Pune with authentic Vedic rituals.
-
-</p>
-
-</div>
-
-<div>
-
-<h3>Quick Links</h3>
-
-<ul>
-
-<li><a href="index.html">Home</a></li>
-
-<li><a href="about.html">About</a></li>
-
-<li><a href="services.html">Services</a></li>
-
-<li><a href="gallery.html">Gallery</a></li>
-
-</ul>
-
-</div>
-
-<div>
-
-<h3>Popular Pujas</h3>
-
-<ul>
-
-<li>Marriage</li>
-
-<li>Satyanarayan</li>
-
-<li>Vastu</li>
-
-<li>Havan</li>
-
-</ul>
-
-</div>
-
-<div>
-
-<h3>Follow Us</h3>
-
-<div class="socials">
-
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-
-<a href="#"><i class="fab fa-instagram"></i></a>
-
-<a href="#"><i class="fab fa-youtube"></i></a>
-
-<a href="#"><i class="fab fa-whatsapp"></i></a>
-
-</div>
-
-</div>
-
-</div>
-
-<hr>
-
-<p class="copyright">
-
-©2026 Pandit Guruji Pune
-
-</p>
-
-</div>
-
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Pandit Guruji</h3>
+        <p>Serving families across Pune with authentic Vedic rituals.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Popular Pujas</h3>
+        <ul>
+          <li>Marriage</li>
+          <li>Satyanarayan</li>
+          <li>Vastu Shanti</li>
+          <li>Havan / Homam</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Follow Us</h3>
+        <p>📍 Pune, Maharashtra</p>
+        <p>📞 +91 XXXXX XXXXX</p>
+        <div class="socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">© 2026 Pandit Guruji Pune. All Rights Reserved.</p>
+  </div>
 </footer>
 
-
-<script>
-const hamburger = document.getElementById('hamburger');
-const nav = document.querySelector('nav');
-const overlay = document.getElementById('navOverlay');
-
-function toggleMenu(){
-  hamburger.classList.toggle('open');
-  nav.classList.toggle('open');
-  overlay.classList.toggle('active');
-  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-}
-
-hamburger.addEventListener('click', toggleMenu);
-overlay.addEventListener('click', toggleMenu);
-
-// close on nav link click
-document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', ()=>{
-  if(nav.classList.contains('open')) toggleMenu();
-}));
-</script>
-
+<script src="js/script.js"></script>
 </body>
-
 </html>

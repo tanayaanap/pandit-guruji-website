@@ -252,7 +252,7 @@ left:0;
 
 width:100%;
 
-z-index:10;
+z-index:100; /* above page-banner bg but nav goes higher via fixed */
 
 padding:25px 0;
 
@@ -1320,6 +1320,9 @@ padding:170px 0 120px;
 
 text-align:center;
 
+position:relative; /* needed so hero-header absolute positions inside it */
+overflow:hidden;
+
 background:
 linear-gradient(rgba(10,12,16,.75),rgba(10,12,16,.75)),
 url("../images/home-bg.jpg");
@@ -1632,13 +1635,16 @@ HAMBURGER MENU
 display:none;
 flex-direction:column;
 justify-content:space-between;
-width:28px;
-height:20px;
+width:34px;    /* slightly larger tap target */
+height:22px;
 cursor:pointer;
-z-index:200;
+z-index:10002; /* must be highest */
 background:none;
 border:none;
-padding:0;
+padding:4px;   /* extra tap area */
+position:relative;
+touch-action:manipulation;
+-webkit-tap-highlight-color:transparent;
 }
 
 .hamburger span{
@@ -1661,6 +1667,9 @@ opacity:0;
 .hamburger.open span:nth-child(3){
 transform:translateY(-9px) rotate(-45deg);
 }
+
+/* nav-close button: hidden by default, shown only inside mobile nav */
+.nav-close{ display:none; }
 
 /*==================================================
 RESPONSIVE — 1100px (large tablet / small laptop)
@@ -1725,14 +1734,20 @@ RESPONSIVE — 768px (tablet / large phone)
 
 /* --- NAV --- */
 .hamburger{display:flex;}
+.nav-close{display:flex;}  /* show close X inside nav panel */
 
 .nav-btn{display:none;}
+
+/* nav-container needs to allow hamburger to sit at the right */
+.nav-container{
+  position:relative;
+}
 
 nav{
 position:fixed;
 top:0;
 right:-100%;
-width:75%;
+width:78%;
 max-width:320px;
 height:100vh;
 background:#0D1117;
@@ -1740,27 +1755,84 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-transition:.45s;
-z-index:150;
-border-left:1px solid rgba(201,168,106,.15);
+transition:.45s cubic-bezier(.4,0,.2,1);
+z-index:10001;
+border-left:1px solid rgba(201,168,106,.2);
+box-shadow:-10px 0 40px rgba(0,0,0,.6);
+padding:80px 20px 40px; /* top padding clears the X button area */
+pointer-events:auto;
+-webkit-overflow-scrolling:touch;
+overflow-y:auto;
 }
 
 nav.open{right:0;}
 
 nav ul{
 flex-direction:column;
-gap:30px;
+gap:0;             /* remove gap — use padding on links instead */
 text-align:center;
+width:100%;
+pointer-events:auto;
 }
 
-nav ul li a{font-size:18px;}
+nav ul li{
+pointer-events:auto;
+width:100%;
+}
+
+nav ul li a{
+font-size:20px;
+display:block;
+padding:18px 24px;
+width:100%;
+pointer-events:auto;
+cursor:pointer;
+touch-action:manipulation;
+-webkit-tap-highlight-color:rgba(201,168,106,0.25);
+border-radius:10px;
+transition:background .2s, color .2s;
+position:relative;
+z-index:10003;   /* above everything — links must always be tappable */
+}
+
+nav ul li a:hover,
+nav ul li a.active{
+background:rgba(201,168,106,.12);
+color:var(--gold);
+}
+
+/* X close button shown inside the nav panel on mobile */
+.nav-close{
+display:flex;
+position:absolute;
+top:20px;
+right:20px;
+width:40px;
+height:40px;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+border-radius:50%;
+cursor:pointer;
+font-size:20px;
+color:white;
+z-index:10002;
+touch-action:manipulation;
+}
 
 .nav-overlay{
 display:none;
 position:fixed;
-inset:0;
-background:rgba(0,0,0,.5);
-z-index:140;
+top:0;
+left:0;
+/* Right edge stops where nav panel begins (nav is max 320px wide from right) */
+right:78%;
+bottom:0;
+background:rgba(0,0,0,.65);
+z-index:10000;
+cursor:pointer;
+pointer-events:auto;
 }
 
 .nav-overlay.active{display:block;}
@@ -1819,7 +1891,10 @@ gap:14px;
 .cta p{font-size:16px;}
 
 /* --- SECTION PADDING --- */
-section{padding:60px 0;}
+section{padding:50px 0;}
+
+/* Safety: ensure body scroll always works on page load */
+body{overflow-x:hidden; overflow-y:auto;}
 
 }
 
@@ -1830,62 +1905,111 @@ RESPONSIVE — 480px (small phones)
 @media(max-width:480px){
 
 /* --- NAV --- */
-.logo{font-size:22px;}
-.logo i{font-size:22px;}
+.logo{font-size:20px;}
+.logo i{font-size:20px;}
 
 /* --- HERO --- */
-.hero-content h1{font-size:28px; letter-spacing:.5px;}
+.hero-content h1{font-size:26px; letter-spacing:.3px;}
 .hero-content p{font-size:14px;}
-.hero-tag{font-size:12px; padding:6px 14px;}
+.hero-tag{font-size:11px; padding:6px 12px;}
 
-.btn{padding:12px 22px; font-size:14px;}
-.btn-outline{padding:12px 22px; font-size:14px;}
+.btn{padding:11px 20px; font-size:13px;}
+.btn-outline{padding:11px 20px; font-size:13px;}
 
-/* --- GRIDS → 1 col on tiny phones --- */
-.quick-grid,
+/* --- GRIDS — 2-col on phones --- */
 .services-home-grid,
-.services-grid,
-.gallery-grid,
-.why-grid,
-.stats-grid{grid-template-columns:1fr;}
+.services-grid{grid-template-columns:repeat(2,1fr); gap:14px;}
 
-.footer-grid{grid-template-columns:1fr;}
+.gallery-grid{grid-template-columns:repeat(2,1fr); gap:10px;}
+
+.why-grid{grid-template-columns:repeat(2,1fr); gap:14px;}
+
+.stats-grid{grid-template-columns:repeat(2,1fr); gap:14px;}
+
+.quick-grid{grid-template-columns:repeat(2,1fr); gap:14px;}
+
+/* footer stays 1-col — too wide otherwise */
+.footer-grid{grid-template-columns:1fr; gap:28px;}
 
 /* --- ABOUT --- */
-.about-image img{height:260px;}
+.about-image img{height:240px;}
 
 /* --- SECTIONS --- */
-.section-heading h2{font-size:26px;}
-.section-heading{margin-bottom:35px;}
+.section-heading h2{font-size:24px;}
+.section-heading{margin-bottom:30px;}
 
-.page-banner h1{font-size:30px;}
-.page-banner p{font-size:15px;}
-.page-banner{padding:120px 0 60px;}
+.page-banner h1{font-size:26px;}
+.page-banner p{font-size:14px;}
+.page-banner{padding:110px 0 55px;}
 
-.cta h2{font-size:26px;}
-.cta{padding:70px 0;}
+.cta h2{font-size:24px;}
+.cta p{font-size:14px;}
+.cta{padding:60px 0;}
 
 /* --- CONTACT --- */
 .contact-info,
-.contact-form{padding:25px 20px;}
+.contact-form{padding:22px 16px;}
 
 /* --- STATS --- */
-.stats-grid h2{font-size:42px;}
+.stats-grid h2{font-size:38px;}
+.stats-grid p{font-size:14px;}
+.stats-grid div{padding:28px 12px;}
 
-/* --- CARDS --- */
-.card-content h3{font-size:20px;}
-.service-content h3{font-size:20px;}
-.service-content h3{font-size:19px;}
-.why-card{padding:35px 20px;}
-.why-card i{font-size:42px;}
-.puja-meta{gap:8px;}
-.puja-meta span{font-size:11px; padding:3px 10px;}
-.service-card img{height:200px;}
+/* --- CARDS — compact on 2-col --- */
+.card-content{padding:16px;}
+.card-content h3{font-size:16px; margin-bottom:8px;}
+.card-content p{font-size:13px; margin-bottom:12px;}
+
+.service-content{padding:14px;}
+.service-content h3{font-size:15px; margin-bottom:8px;}
+.service-content p{font-size:12px; margin-bottom:10px;}
+.service-card img{height:140px;}
+.service-home-card img{height:130px;}
+
+.why-card{padding:22px 14px;}
+.why-card i{font-size:32px; margin-bottom:14px;}
+.why-card h3{font-size:16px; margin-bottom:8px;}
+.why-card p{font-size:12px;}
+
+.quick-card{padding:22px 14px;}
+.quick-card .icon{width:54px; height:54px; margin-bottom:14px;}
+.quick-card i{font-size:24px;}
+.quick-card h3{font-size:16px; margin-bottom:8px;}
+.quick-card p{font-size:12px;}
+
+/* --- PUJA META BADGES --- */
+.puja-meta{gap:6px; margin-bottom:10px;}
+.puja-meta span{font-size:10px; padding:3px 8px;}
+
+/* --- GALLERY --- */
+.gallery-grid img{height:140px; border-radius:10px;}
+
+/* --- TESTIMONIALS --- */
+.testimonial-grid{grid-template-columns:1fr;}
 
 /* --- FOOTER --- */
-footer{padding:55px 0 20px;}
-.footer-grid{gap:30px;}
+footer{padding:45px 0 16px;}
+.footer-grid{gap:24px;}
+footer hr{margin:35px 0 18px;}
+.copyright{font-size:13px;}
 
+}
+
+/*==================================================
+RESPONSIVE — 360px (very small phones)
+==================================================*/
+
+@media(max-width:360px){
+.hero-content h1{font-size:22px;}
+.services-home-grid,
+.services-grid,
+.gallery-grid,
+.quick-grid,
+.why-grid{gap:10px;}
+.service-card img{height:120px;}
+.service-home-card img{height:115px;}
+.card-content h3{font-size:14px;}
+.service-content h3{font-size:13px;}
 }
 
 
@@ -1979,4 +2103,176 @@ text-shadow:
 
 }
 
+}
+/*==================================================
+  CRITICAL FIXES — z-index & mobile nav
+==================================================*/
+
+/* Hero navbar must sit above hero overlay (z-index:2) */
+.hero .hero-header{
+  z-index:200;
+}
+
+/*
+ * MOBILE NAV Z-INDEX STACK (highest to lowest):
+ *   hamburger  : 10002  — always tappable
+ *   nav panel  : 10001  — slide-in drawer
+ *   nav overlay: 10000  — dim background, BEHIND nav
+ *
+ * The overlay MUST be lower than the nav panel so links
+ * inside the panel are never blocked by the overlay's
+ * pointer-event layer on mobile browsers.
+ */
+.hamburger{
+  z-index:10002 !important;
+  position:relative;
+}
+
+nav{
+  z-index:10001 !important;
+}
+
+.nav-overlay{
+  z-index:10000 !important;
+}
+
+/* Hero content above hero overlay (z-index:2) */
+.hero-content{
+  z-index:10;
+}
+
+/* Ensure nav links are always clickable/tappable */
+nav ul li a{
+  position:relative;
+  z-index:1;
+  cursor:pointer;
+  -webkit-tap-highlight-color:rgba(201,168,106,0.2);
+  touch-action:manipulation;
+}
+
+/* Make service cards always visible (animation is bonus, not required) */
+.service-card,
+.service-home-card{
+  opacity:1 !important;
+  transform:none;
+}
+/* But still allow fade-up when JS adds .show */
+.fade-up{
+  opacity:0;
+  transform:translateY(50px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.fade-up.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* Google Maps iframe */
+.map-container{
+  width:100%;
+  height:450px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(201,168,106,.25);
+}
+.map-container iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+/*==================================================
+  MOBILE FIX — Quick grid cards too large on phone
+==================================================*/
+
+@media(max-width:768px){
+  /* Quick service cards — compact on mobile */
+  .quick-grid{
+    grid-template-columns: repeat(2,1fr);
+    gap: 14px;
+  }
+  .quick-card{
+    padding: 22px 14px;
+  }
+  .quick-card .icon{
+    width: 52px;
+    height: 52px;
+    margin-bottom: 12px;
+  }
+  .quick-card i{
+    font-size: 22px;
+  }
+  .quick-card h3{
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .quick-card p{
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@media(max-width:480px){
+  .quick-grid{
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+  }
+  .quick-card{
+    padding: 16px 10px;
+  }
+  .quick-card .icon{
+    width: 44px;
+    height: 44px;
+    margin-bottom: 10px;
+  }
+  .quick-card i{
+    font-size: 18px;
+  }
+  .quick-card h3{
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .quick-card p{
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* Why-cards compact */
+  .why-grid{
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+  }
+  .why-card{
+    padding: 18px 12px;
+  }
+  .why-card i{
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .why-card h3{
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .why-card p{
+    font-size: 11px;
+  }
+
+  /* Service cards on phone — 1 column so text isn't crushed */
+  .services-grid,
+  .services-home-grid{
+    grid-template-columns: 1fr;
+  }
+  .service-card img{
+    height: 180px;
+  }
+  .service-home-card img{
+    height: 160px;
+  }
+
+  /* Contact form full width */
+  .contact-grid{
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }

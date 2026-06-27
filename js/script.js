@@ -1,81 +1,68 @@
+/* ============================================
+   PANDIT GURUJI — MAIN SCRIPT (v4 - minimal nav)
+   ============================================ */
 
+document.addEventListener('DOMContentLoaded', function () {
+  document.body.style.overflow  = '';
+  document.body.style.overflowX = 'hidden';
 
+  var btn = document.getElementById('hamburger');
+  var nav = document.getElementById('mainNav');
+  var ovl = document.getElementById('navOverlay');
 
-// Reveal Animation
+  if (!btn || !nav || !ovl) return;
 
-const reveals = document.querySelectorAll(
-".action-card, .service-card, .gallery-item, .info-card, .about-grid"
-);
+  /* ── Open / Close ── */
+  function openMenu() {
+    btn.classList.add('open');
+    nav.classList.add('open');
+    ovl.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-function revealOnScroll(){
+  function closeMenu() {
+    btn.classList.remove('open');
+    nav.classList.remove('open');
+    ovl.classList.remove('active');
+    document.body.style.overflow  = '';
+    document.body.style.overflowX = 'hidden';
+  }
 
-const trigger = window.innerHeight * 0.85;
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    nav.classList.contains('open') ? closeMenu() : openMenu();
+  });
 
-reveals.forEach(item=>{
+  ovl.addEventListener('click', closeMenu);
 
-const top = item.getBoundingClientRect().top;
-
-if(top < trigger){
-
-item.classList.add("show");
-
-}
-
-});
-
-}
-
-window.addEventListener("scroll", revealOnScroll);
-
-revealOnScroll();
-
-
-// Smooth Button Hover
-
-document.querySelectorAll(".btn").forEach(btn=>{
-
-btn.addEventListener("mouseenter",()=>{
-
-btn.style.transform="translateY(-5px)";
-
-});
-
-btn.addEventListener("mouseleave",()=>{
-
-btn.style.transform="translateY(0px)";
-
-});
-
-});
-
-
-// Active Navigation
-
-const links = document.querySelectorAll("nav a");
-
-links.forEach(link=>{
-
-if(link.href===window.location.href){
-
-link.classList.add("active");
-
-}
+  /* ── Nav links: DO NOTHING except close the menu.
+       Let the browser follow the <a href> completely on its own.
+       No preventDefault, no window.location, no setTimeout. ── */
+  nav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      closeMenu();
+      /* browser navigates via href naturally */
+    });
+  });
 
 });
 
+/* ---------- Fade-Up ---------- */
+document.addEventListener('DOMContentLoaded', function () {
+  var els = document.querySelectorAll('.fade-up');
+  if (!els.length) return;
+  function show() {
+    var h = window.innerHeight * 0.92;
+    els.forEach(function (el) {
+      if (el.getBoundingClientRect().top < h) el.classList.add('show');
+    });
+  }
+  window.addEventListener('scroll', show, { passive: true });
+  show();
+});
 
-// Simple Fade In Hero
-
-window.onload=()=>{
-
-const hero=document.querySelector(".hero-content");
-
-if(hero){
-
-hero.style.opacity="1";
-
-hero.style.transform="translateY(0px)";
-
-}
-
-};
+/* ---------- Hero reveal ---------- */
+window.addEventListener('load', function () {
+  var hero = document.querySelector('.hero-content');
+  if (hero) { hero.style.opacity = '1'; hero.style.transform = 'translateY(0)'; }
+});

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services | Pandit Guruji Pune</title>
-<link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Pandit Guruji Pune</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
         <i class="fa-solid fa-om"></i>
         PanditGuruji
       </div>
-      <nav>
+      <nav id="mainNav">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -33,6 +33,7 @@
       </button>
     </div>
   </header>
+
   <div class="nav-overlay" id="navOverlay"></div>
 
   <div class="container">
@@ -51,7 +52,6 @@
 
     <div class="services-grid">
 
-      <!-- CARD 1 -->
       <div class="service-card fade-up">
         <img src="images/1.jpg" alt="Satyanarayan Puja">
         <div class="service-content">
@@ -65,7 +65,6 @@
         </div>
       </div>
 
-      <!-- CARD 2 -->
       <div class="service-card fade-up">
         <img src="images/16.jpg" alt="Griha Pravesh">
         <div class="service-content">
@@ -79,7 +78,6 @@
         </div>
       </div>
 
-      <!-- CARD 3 -->
       <div class="service-card fade-up">
         <img src="images/3.jpg" alt="Marriage Ceremony">
         <div class="service-content">
@@ -93,7 +91,6 @@
         </div>
       </div>
 
-      <!-- CARD 4 -->
       <div class="service-card fade-up">
         <img src="images/4.jpg" alt="Ganesh Puja">
         <div class="service-content">
@@ -107,7 +104,6 @@
         </div>
       </div>
 
-      <!-- CARD 5 -->
       <div class="service-card fade-up">
         <img src="images/5.jpg" alt="Lakshmi Puja">
         <div class="service-content">
@@ -121,7 +117,6 @@
         </div>
       </div>
 
-      <!-- CARD 6 -->
       <div class="service-card fade-up">
         <img src="images/6.jpg" alt="Rudrabhishek">
         <div class="service-content">
@@ -135,7 +130,6 @@
         </div>
       </div>
 
-      <!-- CARD 7 -->
       <div class="service-card fade-up">
         <img src="images/7.jpg" alt="Navagraha Shanti">
         <div class="service-content">
@@ -149,7 +143,6 @@
         </div>
       </div>
 
-      <!-- CARD 8 -->
       <div class="service-card fade-up">
         <img src="images/8.jpg" alt="Vastu Shanti">
         <div class="service-content">
@@ -163,7 +156,6 @@
         </div>
       </div>
 
-      <!-- CARD 9 -->
       <div class="service-card fade-up">
         <img src="images/9.jpg" alt="Naamkaran">
         <div class="service-content">
@@ -177,7 +169,6 @@
         </div>
       </div>
 
-      <!-- CARD 10 -->
       <div class="service-card fade-up">
         <img src="images/10.jpg" alt="Mundan Sanskar">
         <div class="service-content">
@@ -191,7 +182,6 @@
         </div>
       </div>
 
-      <!-- CARD 11 -->
       <div class="service-card fade-up">
         <img src="images/11.jpg" alt="Bhoomi Pujan">
         <div class="service-content">
@@ -205,7 +195,6 @@
         </div>
       </div>
 
-      <!-- CARD 12 -->
       <div class="service-card fade-up">
         <img src="images/12.jpg" alt="Havan / Homam">
         <div class="service-content">
@@ -277,29 +266,6 @@
   </div>
 </footer>
 
-<script>
-// Hamburger
-const hamburger = document.getElementById('hamburger');
-const nav = document.querySelector('nav');
-const overlay = document.getElementById('navOverlay');
-function toggleMenu(){
-  hamburger.classList.toggle('open');
-  nav.classList.toggle('open');
-  overlay.classList.toggle('active');
-  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-}
-hamburger.addEventListener('click', toggleMenu);
-overlay.addEventListener('click', toggleMenu);
-document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', ()=>{
-  if(nav.classList.contains('open')) toggleMenu();
-}));
-
-// Fade-up scroll animation
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
-}, { threshold: 0.10 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
-
+<script src="js/script.js"></script>
 </body>
 </html>
