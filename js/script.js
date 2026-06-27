@@ -1,68 +1,105 @@
-/* ============================================
-   PANDIT GURUJI — MAIN SCRIPT (v4 - minimal nav)
-   ============================================ */
+/* ============================================================
+   NAV.JS — Bulletproof mobile navigation for iOS + Android
+   ============================================================ */
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.body.style.overflow  = '';
-  document.body.style.overflowX = 'hidden';
 
-  var btn = document.getElementById('hamburger');
-  var nav = document.getElementById('mainNav');
-  var ovl = document.getElementById('navOverlay');
-
-  if (!btn || !nav || !ovl) return;
+  var hamburger = document.getElementById('hamburger');
+  var mainNav   = document.getElementById('mainNav');
+  var overlay   = document.getElementById('navOverlay');
+  var navbar    = document.getElementById('navbar');
 
   /* ── Open / Close ── */
   function openMenu() {
-    btn.classList.add('open');
-    nav.classList.add('open');
-    ovl.classList.add('active');
+    if (!hamburger || !mainNav || !overlay) return;
+    hamburger.classList.add('open');
+    mainNav.classList.add('open');
+    overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeMenu() {
-    btn.classList.remove('open');
-    nav.classList.remove('open');
-    ovl.classList.remove('active');
-    document.body.style.overflow  = '';
-    document.body.style.overflowX = 'hidden';
+    if (!hamburger || !mainNav || !overlay) return;
+    hamburger.classList.remove('open');
+    mainNav.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
-  btn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    nav.classList.contains('open') ? closeMenu() : openMenu();
-  });
+  /* ── Hamburger ── */
+  if (hamburger) {
+    hamburger.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      mainNav && mainNav.classList.contains('open') ? closeMenu() : openMenu();
+    });
+  }
 
-  ovl.addEventListener('click', closeMenu);
-
-  /* ── Nav links: DO NOTHING except close the menu.
-       Let the browser follow the <a href> completely on its own.
-       No preventDefault, no window.location, no setTimeout. ── */
-  nav.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
+  /* ── Overlay tap = close ── */
+  if (overlay) {
+    overlay.addEventListener('touchstart', function (e) {
+      e.preventDefault();
       closeMenu();
-      /* browser navigates via href naturally */
-    });
-  });
+    }, { passive: false });
+    overlay.addEventListener('click', closeMenu);
+  }
 
-});
+  /* ── Nav links — use touchstart for instant response on mobile ──
+     touchstart fires immediately (no 300ms delay) and before any
+     other handler can interfere. We navigate directly from here.   */
+  if (mainNav) {
+    mainNav.querySelectorAll('a').forEach(function (link) {
+      var tapped = false;
 
-/* ---------- Fade-Up ---------- */
-document.addEventListener('DOMContentLoaded', function () {
-  var els = document.querySelectorAll('.fade-up');
-  if (!els.length) return;
-  function show() {
-    var h = window.innerHeight * 0.92;
-    els.forEach(function (el) {
-      if (el.getBoundingClientRect().top < h) el.classList.add('show');
+      link.addEventListener('touchstart', function (e) {
+        tapped = true;
+        /* Do NOT preventDefault here — we want the tap to register visually */
+      }, { passive: true });
+
+      link.addEventListener('touchend', function (e) {
+        if (!tapped) return;
+        tapped = false;
+        e.preventDefault();   /* prevent the ghost click that follows */
+        e.stopPropagation();
+        var href = link.getAttribute('href');
+        closeMenu();
+        if (href && href !== '#') {
+          /* Small delay so the close animation starts before page changes */
+          setTimeout(function () { window.location.href = href; }, 50);
+        }
+      }, { passive: false });
+
+      /* Fallback for desktop / non-touch */
+      link.addEventListener('click', function (e) {
+        if (tapped) return; /* already handled by touchend */
+        var href = link.getAttribute('href');
+        closeMenu();
+        if (href && href !== '#') {
+          e.preventDefault();
+          window.location.href = href;
+        }
+      });
     });
   }
-  window.addEventListener('scroll', show, { passive: true });
-  show();
-});
 
-/* ---------- Hero reveal ---------- */
-window.addEventListener('load', function () {
-  var hero = document.querySelector('.hero-content');
-  if (hero) { hero.style.opacity = '1'; hero.style.transform = 'translateY(0)'; }
+  /* ── Fade-up on scroll ── */
+  var fadeEls = document.querySelectorAll('.fade-up');
+  function checkFade() {
+    var threshold = window.innerHeight * 0.92;
+    fadeEls.forEach(function (el) {
+      if (el.getBoundingClientRect().top < threshold) el.classList.add('show');
+    });
+  }
+  if (fadeEls.length) {
+    window.addEventListener('scroll', checkFade, { passive: true });
+    checkFade();
+  }
+
+  /* ── Navbar scroll shadow ── */
+  if (navbar) {
+    window.addEventListener('scroll', function () {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+  }
+
 });
